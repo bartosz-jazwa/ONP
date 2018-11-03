@@ -15,8 +15,7 @@ public class Main {
 
         String[] expArray  = expression.split("\\p{Punct}");
         List<String > expList = Arrays.asList(expArray);
-        Deque<String> expStack = new ArrayDeque<>();
-        expList.forEach(expStack::add);
+        Deque<String> expStack = new ArrayDeque<>(expList);
         String[] operArray = expression.split("\\d+");
         List<String > operList = Arrays.asList(operArray);
         List<String > splitOperList = new ArrayList<>();
@@ -26,8 +25,7 @@ public class Main {
         operList = splitOperList.stream()
                 .filter(s -> !s.equals(""))
                 .collect(Collectors.toList());
-        Deque<String> operDequeue = new ArrayDeque<>();
-        operList.forEach(operDequeue::add);
+        Deque<String> operDequeue = new ArrayDeque<>(operList);
 
         //operDequeue.poll();
         Deque<String > sortedOperList  =new ArrayDeque<>();
