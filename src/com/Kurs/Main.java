@@ -8,6 +8,7 @@ public class Main {
 
         LineSplitter splitter = new LineSplitter();
         Deque<String> formulaQueue = splitter.split(splitter.getInput());
+
         //System.out.println(formulaQueue.poll());
         CalcONP calulator = new CalcONP();
         System.out.println(calulator.calc(calulator.formToOnp(formulaQueue)));

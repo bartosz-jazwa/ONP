@@ -12,10 +12,12 @@ public class LineSplitter {
     }
 
     public Deque<String> split(String input){
-        String[] expArray  = input.split("\\p{Punct}");
-        Deque<String> expStack = new ArrayDeque<>(Arrays.asList(expArray));
-        String[] operArray = input.split("\\d+");
+        String[] operArray = input.split("\\d+\\.?\\d*");
         List<String > operList = Arrays.asList(operArray);
+
+        String[] expArray  = input.split("\\*|\\/|\\(|\\)|\\+|\\-");
+        Deque<String> expStack = new ArrayDeque<>(Arrays.asList(expArray));
+
         List<String > splitOperList = new ArrayList<>();
         operList.stream()
                 .map(s -> s.split(""))

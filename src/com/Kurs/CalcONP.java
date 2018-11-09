@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 public class CalcONP {
     private Deque<String> arguments  = new ArrayDeque<>();
     private Deque<String> operands = new ArrayDeque<>();
-    private Stack<Integer> stack = new Stack<>();
+    private Stack<Double> stack = new Stack<>();
 
-    public Integer calc(Deque<String> args) {
-        Integer operand1 = 0;
-        Integer operand2 = 0;
-        int result = 0;
+    public Double calc(Deque<String> args) {
+        Double operand1 = 0.0;
+        Double operand2 = 0.0;
+        double result = 0.0;
         while (args.size() > 0) {
             String arg = args.pollLast();
             if (isOperand(arg)) {
@@ -46,17 +46,10 @@ public class CalcONP {
                         stack.push(result);
                         break;
                     }
-                    case "^": {
-                        operand1 = stack.pop();
-                        operand2 = stack.pop();
-                        result = operand1 ^ operand2;
-                        stack.push(result);
-                        break;
-                    }
                 }
 
             } else if (isArgument(arg)) {
-                stack.push(Integer.parseInt(arg));
+                stack.push(Double.parseDouble(arg));
             }
         }
         return stack.pop();
@@ -121,12 +114,12 @@ public class CalcONP {
 
     private boolean isArgument(String input){
 
-        Pattern number = Pattern.compile("\\d+");
+        Pattern number = Pattern.compile("\\d+\\.?\\d*");
         Matcher n = number.matcher(input);
         return n.matches();
     }
     private boolean isOperand(String input){
-        Pattern operator = Pattern.compile("\\p{Punct}");
+        Pattern operator = Pattern.compile("\\*|\\/|\\(|\\)|\\+|\\-");
         Matcher o = operator.matcher(input);
         return o.matches();
     }
